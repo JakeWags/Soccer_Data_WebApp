@@ -1,6 +1,6 @@
 import os
 
-from flask import Flask, json, send_from_directory, send_file
+from flask import Flask, json, send_from_directory, render_template
 
 app = Flask(__name__)
 
@@ -11,8 +11,8 @@ with open(json_filename, 'r', encoding='utf8') as json_output:  # file not using
 
 
 @app.route('/')
-def showjson():
-    return send_from_directory(app.static_folder + '/data/', 'soccer_small.json')
+def index():
+    return render_template('index.html')
 
 # returns a player and all the player attributes
 @app.route('/players/<name>')
@@ -29,22 +29,22 @@ def show_all_players():
 # returns all countries with a list of players from those countries
 @app.route('/countries/')
 def show_countries():
-    return clubs_or_countries('Nationality')
+    return get_value_and_format('Nationality')
 
 # returns all clubs with a list of players playing for those clubs
 @app.route('/clubs/')
 def show_clubs():
-    return clubs_or_countries('Club')
+    return get_value_and_format('Club')
 
 # returns a list of all attribute names
 @app.route('/attributes/')
 def show_attributes():
-    return None
+    return list(json_data[0].keys())
 
 
 # returns a JSON string containing a list of clubs or countries with their players
 # helper method for '/clubs/' or '/countries/'
-def clubs_or_countries(to_get):
+def get_value_and_format(to_get):
     ret_array = [] # array of python dicts, to be turned into json data... country example:
                    # {
                    #    'Name': 'Spain'
