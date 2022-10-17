@@ -29,13 +29,35 @@ function tabulate(data, columns) {
     let thead = table.append('thead').attr('id','dataTableHead');
     let tbody = table.append('tbody').attr('id','dataTableBody');
 
+    let sortAscending = true;
     // append the header row
     thead.append('tr')
       .attr('id', 'dataTableHeadRow')
       .selectAll('th')
       .data(columns).enter()
       .append('th')
+        .on('click', function click(e) {
+          console.log(e); // column header
+          if (sortAscending) {
+            rows.sort(function(a,b) { return d3.ascending(a[e], b[e]); });
+            sortAscending = false;
+
+            d3.selectAll('.ascending').attr('class', '');
+            d3.selectAll('.descending').attr('class', '');
+
+            d3.select(this).attr('class', 'ascending');
+          } else {
+            rows.sort(function(a,b) { return d3.ascending(b[e], a[e]); });
+            sortAscending = true;
+            
+            d3.selectAll('.ascending').attr('class', '');
+            d3.selectAll('.descending').attr('class', '');
+
+            d3.select(this).attr('class', 'descending');
+          }
+        })
         .text(function (column) { return column.replace(/_/g,' '); });
+  
 
     // create a row for each object in the data
     let rows = tbody.selectAll('tr')
@@ -70,6 +92,7 @@ function dropdown(data, remaining_attributes) {
 
 // messy way to do this.
 // find a way to neatly append a column and rows instead.
+// use update instead of enter to append?
 function updateTable(data, attributes) {
   d3.select('#dataTable').html("");
   tabulate(data, attributes)
