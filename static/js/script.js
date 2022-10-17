@@ -1,4 +1,4 @@
-d3.json('http://127.0.0.1:5000/players/', function (error,data) {
+d3.json('http://127.0.0.1:5000/players/', function (err ,data) {
     let attributes;
     let remaining_attributes;
 
