@@ -7,6 +7,7 @@ mimetypes.add_type('application/javascript', '.js')
 mimetypes.add_type('text/css', '.css')
 
 app = Flask(__name__)
+app.config['JSON_AS_ASCII'] = False
 
 json_filename = os.path.join(app.static_folder, 'data', 'soccer_small.json')
 
