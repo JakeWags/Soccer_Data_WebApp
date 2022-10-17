@@ -32,40 +32,51 @@ function tabulate(data, columns) {
 
     let sortAscending = true;
     
-    thead.append('tr')
+    let t = thead.append('tr')
       .attr('id', 'dataTableHeadRow')
       .selectAll('th')
       .data(columns).enter()
       .append('th')
-        .append('div')
-          .attr('class', 'header-text')
-          .on('click', function click(e) {
-            d3.selectAll('.ascending').attr('class', 'header-text');
-            d3.selectAll('.descending').attr('class', 'header-text');
-            if (sortAscending || currentSortCol != e) {
-              rows.sort(function(a,b) { return d3.ascending(a[e], b[e]); });
-              sortAscending = false;
-  
-              d3.select(this).attr('class', 'ascending header-text');
-            } else {
-              rows.sort(function(a,b) { return d3.ascending(b[e], a[e]); });
-              sortAscending = true;
-  
-              d3.select(this).attr('class', 'descending header-text');
-            }
-            currentSortCol = e;
-          })
-          .text(function (column) { return column.replace(/_/g,' '); })
-        .append('button')
-          .attr('class', 'removeButton')
-          .text(() => 'X')
-          .on('click', (e) => removeColumn(data, e));
+      .append('div').style('display', 'flex');
+    
+    t.append('button')
+      .attr('class', 'removeButton')
+      .text(() => 'X')
+      .on('click', (e) => removeColumn(data, e));
+
+    t.append('div')
+      .attr('class', 'header-text')
+      .on('click', function(e) {
+        d3.selectAll('.ascending').attr('class', 'header-text');
+        d3.selectAll('.descending').attr('class', 'header-text');
+        if (sortAscending || currentSortCol != e) {
+          rows.sort(function(a,b) { return d3.ascending(a[e], b[e]); });
+          sortAscending = false;
+
+          d3.select(this).attr('class', 'ascending header-text');
+        } else {
+          rows.sort(function(a,b) { return d3.ascending(b[e], a[e]); });
+          sortAscending = true;
+
+          d3.select(this).attr('class', 'descending header-text');
+        }
+        currentSortCol = e;
+      })
+      .text(function (column) { return column.replace(/_/g,' '); })
+
+      
         
     // create a row for each object in the data
     let rows = tbody.selectAll('tr')
       .data(data)
       .enter()
-      .append('tr');
+      .append('tr')
+      .on('mouseover', function(e) {
+        d3.select(this).attr('class', 'active-row');
+      })
+      .on('mouseout', function(e) {
+        d3.select(this).attr('class', '');
+      });
 
     // create a cell in each row for each column
     let cells = rows.selectAll('td')
