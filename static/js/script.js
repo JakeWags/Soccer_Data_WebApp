@@ -30,6 +30,7 @@ function tabulate(data, columns) {
     let tbody = table.append('tbody').attr('id','dataTableBody');
 
     let sortAscending = true;
+    let currentSortCol;
     // append the header row
     thead.append('tr')
       .attr('id', 'dataTableHeadRow')
@@ -37,24 +38,20 @@ function tabulate(data, columns) {
       .data(columns).enter()
       .append('th')
         .on('click', function click(e) {
-          console.log(e); // column header
-          if (sortAscending) {
+          d3.selectAll('.ascending').attr('class', '');
+          d3.selectAll('.descending').attr('class', '');
+          if (sortAscending || currentSortCol != e) {
             rows.sort(function(a,b) { return d3.ascending(a[e], b[e]); });
             sortAscending = false;
-
-            d3.selectAll('.ascending').attr('class', '');
-            d3.selectAll('.descending').attr('class', '');
 
             d3.select(this).attr('class', 'ascending');
           } else {
             rows.sort(function(a,b) { return d3.ascending(b[e], a[e]); });
             sortAscending = true;
-            
-            d3.selectAll('.ascending').attr('class', '');
-            d3.selectAll('.descending').attr('class', '');
 
             d3.select(this).attr('class', 'descending');
           }
+          currentSortCol = e;
         })
         .text(function (column) { return column.replace(/_/g,' '); });
   
