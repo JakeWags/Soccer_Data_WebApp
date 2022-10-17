@@ -25,3 +25,7 @@ htmlcov/
 .coverage
 .coverage.*
 *,cover
+
+# Node dependecies
+node_modules
+bower_components

@@ -10,6 +10,7 @@
     <select id="dropdown"></select>
     <button id="dropdownSubmit">Append Column</button>
     <table id="dataTable"></table>
-    <script type='text/javascript' src='/static/js/script.js'></script>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+    <!-- <script type="module" crossorigin="anonymous" src="{{ url_for('static', filename='js/test.js') }}"></script> -->
   </body>
 </html>
