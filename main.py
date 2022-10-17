@@ -14,6 +14,10 @@ with open(json_filename, 'r', encoding='utf8') as json_output:  # file not using
 def index():
     return render_template('index.html')
 
+@app.route('/table')
+def display_table():
+    return render_template('table.html')
+
 # returns a player and all the player attributes
 @app.route('/players/<name>')
 def show_player(name):
