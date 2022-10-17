@@ -2,7 +2,12 @@ import os
 
 from flask import Flask, json, send_from_directory, render_template
 
+import mimetypes
+mimetypes.add_type('application/javascript', '.js')
+mimetypes.add_type('text/css', '.css')
+
 app = Flask(__name__)
+app.config['JSON_AS_ASCII'] = False
 
 json_filename = os.path.join(app.static_folder, 'data', 'soccer_small.json')
 
@@ -13,6 +18,17 @@ with open(json_filename, 'r', encoding='utf8') as json_output:  # file not using
 @app.route('/')
 def index():
     return render_template('index.html')
+
+@app.route('/table/')
+def display_table():
+    return render_template('table.html')
+
+@app.route('/static/<path:filename>')
+def serve_table_js(filename):
+    return send_from_directory(app.config['ES6_MODULES'],
+                               filename, as_attachment=True,
+                               mimetype='text/javascript'
+    )
 
 # returns a player and all the player attributes
 @app.route('/players/<name>')
@@ -39,7 +55,7 @@ def show_clubs():
 # returns a list of all attribute names
 @app.route('/attributes/')
 def show_attributes():
-    return list(json_data[0].keys())
+    return json.jsonify(list(json_data[0].keys()))
 
 
 # returns a JSON string containing a list of clubs or countries with their players
