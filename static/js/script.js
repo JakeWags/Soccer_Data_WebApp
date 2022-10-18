@@ -282,27 +282,4 @@ function drawPlot(attribute_data, player_data) {
             })
             .attr("stroke", "black")
         });
-
-
-      // let mouseover = function(d) {
-      //   tooltip
-      //     .transition()
-      //     .duration(200)
-      //     .style("opacity", 1)
-      //   tooltip
-      //       .html("<span style='color:grey'>Sepal length: </span>" + d.Sepal_Length) // + d.Prior_disorder + "<br>" + "HR: " +  d.HR)
-      //       .style("left", (d3.mouse(this)[0]+30) + "px")
-      //       .style("top", (d3.mouse(this)[1]+30) + "px")
-      // }
-      // let mousemove = function(d) {
-      //   tooltip
-      //     .style("left", (d3.mouse(this)[0]+30) + "px")
-      //     .style("top", (d3.mouse(this)[1]+30) + "px")
-      // }
-      // let mouseleave = function(d) {
-      //   tooltip
-      //     .transition()
-      //     .duration(200)
-      //     .style("opacity", 0)
-      // }
 }
