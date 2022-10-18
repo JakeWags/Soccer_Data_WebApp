@@ -16,8 +16,6 @@ const noPlotAttributes =
     "National_Kit", "Club_Position", "Club_Kit", "Club_Joining", 
     "Preffered_Foot", "Birth_Date", "Preffered_Position", "Work_Rate", "Contract_Expiry", "Height", "Weight"];
 
-
-
 d3.json("http://127.0.0.1:5000/players/", function(err, player_data) {
     let bins;
     let stats = [];
@@ -131,5 +129,6 @@ d3.json("http://127.0.0.1:5000/players/", function(err, player_data) {
             .style("fill", function(d){ return("#ffffff") })
             .attr("stroke", "black")
         });
+        
     });
 });

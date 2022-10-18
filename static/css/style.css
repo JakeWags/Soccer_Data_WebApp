@@ -105,8 +105,14 @@ html, body {
     border-bottom: 2px solid #3378da;
 }
 
-#dataTable tbody tr.active-row {
+#dataTable tbody tr:hover {
     color: #194685;
+}
+
+#dataTable tbody tr.clicked-row {
+    background-color: #a7e0f3;
+    color: #000000;
+    border: solid thin #194685;
 }
 
 .descending:after,

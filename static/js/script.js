@@ -69,11 +69,10 @@ function tabulate(data, columns) {
       .data(data)
       .enter()
       .append('tr')
-      .on('mouseover', function(e) {
-        d3.select(this).attr('class', 'active-row');
-      })
-      .on('mouseout', function(e) {
-        d3.select(this).attr('class', '');
+      .attr('class', 'table-row')
+      .on('click', function(e) {
+        d3.selectAll('.clicked-row').attr('class', 'table-row');
+        d3.select(this).attr('class', 'table-row clicked-row');
       });
 
     // create a cell in each row for each column
