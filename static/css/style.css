@@ -43,6 +43,10 @@ html, body {
     border-radius: 0.25rem;
 }
 
+#dropdownSubmit:hover {
+    background-color: #2469c9;
+}
+
 /*******************************/
 /* TABLE */
 /******************************/

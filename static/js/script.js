@@ -3,7 +3,7 @@ let attributes, remaining_attributes;
 d3.json('http://127.0.0.1:5000/players/', function (err ,data) {
 
     d3.json('http://127.0.0.1:5000/attributes/', function(err, json_data) {
-      attributes = ['Name','Nationality','Club','National_Position','Club','Height','Preffered_Foot','Age','Weak_foot','Skill_Moves'];
+      attributes = ['Name','Nationality','Club','National_Position','Height','Preffered_Foot','Age','Weak_foot','Skill_Moves'];
       let data_copy = json_data;
       remaining_attributes = data_copy.filter(n => !attributes.includes(n));
       
