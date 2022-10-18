@@ -251,6 +251,14 @@ function drawPlot(attribute_data, player_data) {
             .style("width", 80)
 
 
+        let applyLabel = function (d, x, y) {
+          let label = svg.append('text')
+          .attr("x", x)
+          .attr("y", y)
+          .attr("dy", ".35em")
+          .text(function() { return d["Name"]; });
+        }
+
         // Add individual points with jitter to separate them
         let jitterWidth = 20
         bins.forEach(function (bin) {
@@ -265,10 +273,36 @@ function drawPlot(attribute_data, player_data) {
             .style("fill", function(d){
               if (d == highlightedPlayer) {
                 d3.select(this).attr("r", 5);
+                applyLabel(d, x(d[bin]) - 70, y(bin) - 10);
+                
+
                 return('#00a7ff');
               }
               return("#ffffff"); 
             })
             .attr("stroke", "black")
         });
+
+
+      // let mouseover = function(d) {
+      //   tooltip
+      //     .transition()
+      //     .duration(200)
+      //     .style("opacity", 1)
+      //   tooltip
+      //       .html("<span style='color:grey'>Sepal length: </span>" + d.Sepal_Length) // + d.Prior_disorder + "<br>" + "HR: " +  d.HR)
+      //       .style("left", (d3.mouse(this)[0]+30) + "px")
+      //       .style("top", (d3.mouse(this)[1]+30) + "px")
+      // }
+      // let mousemove = function(d) {
+      //   tooltip
+      //     .style("left", (d3.mouse(this)[0]+30) + "px")
+      //     .style("top", (d3.mouse(this)[1]+30) + "px")
+      // }
+      // let mouseleave = function(d) {
+      //   tooltip
+      //     .transition()
+      //     .duration(200)
+      //     .style("opacity", 0)
+      // }
 }
