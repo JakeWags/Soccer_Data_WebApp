@@ -130,3 +130,11 @@ html, body {
 .ascending, .descending {
     padding-right: 10px;
 }
+
+.flex-container {
+    display: flex;
+}
+
+#dataPlot {
+    margin-left: 10px;
+}

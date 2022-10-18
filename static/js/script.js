@@ -1,7 +1,7 @@
 let attributes, remaining_attributes;
+let currentSortCol;
 
-d3.json('http://127.0.0.1:5000/players/', function (err ,data) {
-
+d3.json('http://127.0.0.1:5000/players/', function (err,data) {
     d3.json('http://127.0.0.1:5000/attributes/', function(err, json_data) {
       attributes = ['Name','Nationality','Club','National_Position','Height','Preffered_Foot','Age','Weak_foot','Skill_Moves'];
       let data_copy = json_data;
@@ -11,10 +11,10 @@ d3.json('http://127.0.0.1:5000/players/', function (err ,data) {
       dropdown(data, remaining_attributes);
     });
 
+      
     d3.select('#dropdownSubmit').on('click', function(e) {
       let selectedOption = d3.select('#dropdown').property("value");
       if (remaining_attributes.indexOf(selectedOption) > -1) {
-        // removes item from remaining_attributes and pushes it to attributes
         addColumn(data, selectedOption);
       }
 
@@ -22,8 +22,6 @@ d3.json('http://127.0.0.1:5000/players/', function (err ,data) {
       // updateTable(data, selectedOption);
     });
 });
-
-let currentSortCol;
 
 function tabulate(data, columns) {
     let table = d3.select('#dataTable');
@@ -118,6 +116,7 @@ function removeColumn(data, column) {
 }
 
 function addColumn(data, column) {
+  // removes item from remaining_attributes and pushes it to attributes
   attributes.push(remaining_attributes.splice(remaining_attributes.indexOf(column), 1)[0]);
   updateTable(data, attributes);
 }
