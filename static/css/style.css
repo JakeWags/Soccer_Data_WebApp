@@ -43,6 +43,10 @@ html, body {
     border-radius: 0.25rem;
 }
 
+#dropdownSubmit:hover {
+    background-color: #2469c9;
+}
+
 /*******************************/
 /* TABLE */
 /******************************/
@@ -101,8 +105,14 @@ html, body {
     border-bottom: 2px solid #3378da;
 }
 
-#dataTable tbody tr.active-row {
+#dataTable tbody tr:hover {
     color: #194685;
+}
+
+#dataTable tbody tr.clicked-row {
+    background-color: #a7e0f3;
+    color: #000000;
+    border: solid thin #194685;
 }
 
 .descending:after,
@@ -125,4 +135,19 @@ html, body {
 
 .ascending, .descending {
     padding-right: 10px;
+}
+
+.flex-container {
+    display: flex;
+}
+
+#dataPlot {
+    margin-left: 10px;
+}
+
+.highlight-label {
+    opacity: 0.7;
+    background-color:#080808;
+    color: #e3e3e3;
+    font-size: 16px;
 }

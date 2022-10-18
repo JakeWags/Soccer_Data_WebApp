@@ -3,14 +3,18 @@
 <html>
   <head>
     <title>FIFA Database Table</title>
-    <script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+    <script src="https://d3js.org/d3.v4.min.js" charset="utf-8"></script>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <!-- <link rel='stylesheet' href='style.css'> -->
   </head>
   <body>
     <select id="dropdown"></select>
     <button id="dropdownSubmit">Append Column</button>
-    <table id="dataTable"></table>
+    <div class="flex-container">
+      <table id="dataTable"></table>
+      <div id="dataPlot"></div>
+    </div>
     <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+  </body>
   </body>
 </html>
